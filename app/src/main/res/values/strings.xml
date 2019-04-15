@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Gank</string>
+    <string name="latest">最新</string>
+    <string name="filter">分类</string>
+    <string name="meizhi">妹纸</string>
+    <string name="collections">收藏</string>
+    <string name="search">搜索</string>
+
+</resources>
