@@ -1,7 +1,5 @@
 package com.example.chen.gank.data.source.remote;
 
-import android.util.Log;
-
 import com.example.chen.gank.data.api.Api;
 import com.example.chen.gank.data.api.RetrofitClient;
 import com.example.chen.gank.data.bean.GankDailyResult;

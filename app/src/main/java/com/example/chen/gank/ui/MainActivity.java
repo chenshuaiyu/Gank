@@ -6,12 +6,17 @@ import com.example.chen.gank.Inject;
 import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
+import com.example.chen.gank.ui.filter.FilterFragment;
+import com.example.chen.gank.ui.latest.LatestFragment;
 import com.example.chen.gank.utils.BNVUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -30,12 +35,23 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNavigationView;
     private Toolbar mToolbar;
 
+    private Fragment mCurFragment;
+    private LatestFragment mLatestFragment;
+    private FilterFragment mFilterFragment;
+    private FragmentManager mFragmentManager;
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction().hide(mCurFragment);
         switch (item.getItemId()) {
             case R.id.navigation_latest:
+                if (mCurFragment != mLatestFragment)
+                    mCurFragment = mLatestFragment;
                 break;
             case R.id.navigation_filter:
+                if (mCurFragment != mFilterFragment)
+                    mCurFragment = mFilterFragment;
                 break;
             case R.id.navigation_meizhi:
                 break;
@@ -44,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
+        transaction.show(mCurFragment).commit();
         return true;
     };
 
@@ -63,16 +80,25 @@ public class MainActivity extends AppCompatActivity {
 
         BNVUtils.disableShiftMode(mBottomNavigationView);
 
-        MainViewModel mainViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(MainViewModel.class);
-        mainViewModel.getGankDailyResults()
-                .observe(this, gankDailyResult -> {
-                            List<Gank> welfare = gankDailyResult.getResults().getWelfare();
-                            for (Gank g : welfare) {
-                                Log.d("CCC", g.getUrl());
-                            }
-                        }
-                );
+        mLatestFragment = new LatestFragment();
+        mFilterFragment = new FilterFragment();
+        mCurFragment = mLatestFragment;
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, mLatestFragment)
+                .add(R.id.fragment_container, mFilterFragment)
+                .hide(mFilterFragment)
+                .commit();
 
+//        MainViewModel mainViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(MainViewModel.class);
+//        mainViewModel.getGankDailyResults()
+//                .observe(this, gankDailyResult -> {
+//                            List<Gank> welfare = gankDailyResult.getResults().getWelfare();
+//                            for (Gank g : welfare) {
+//                                Log.d("CCC", g.getUrl());
+//                            }
+//                        }
+//                );
     }
 
     @Override

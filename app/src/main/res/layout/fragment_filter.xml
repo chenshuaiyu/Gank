@@ -2,12 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="40dp"
+        android:background="@color/white"
+        app:tl_indicator_color="@color/colorAccent"
+        app:tl_textAllCaps="false"
+        app:tl_textBold="BOTH"
+        app:tl_textSelectColor="@color/colorPrimary"
+        app:tl_textUnselectColor="@color/grey"
+        app:tl_textsize="14sp" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

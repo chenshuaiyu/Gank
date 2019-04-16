@@ -5,7 +5,8 @@
     android:orientation="vertical">
     
     <com.youth.banner.Banner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_200"/>
+        android:layout_height="@dimen/dp_200" />
 
 </LinearLayout>

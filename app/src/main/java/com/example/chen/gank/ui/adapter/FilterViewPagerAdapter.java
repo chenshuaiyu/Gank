@@ -1,9 +1,11 @@
 package com.example.chen.gank.ui.adapter;
 
 import com.example.chen.gank.data.bean.GankFilterResult;
+import com.example.chen.gank.ui.filter.FilterDetailFragment;
 
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -13,9 +15,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
  * Time : 2019/4/15 22:22
  */
 public class FilterViewPagerAdapter extends FragmentPagerAdapter {
-    private List<Fragment> mFragments;
+    private List<FilterDetailFragment> mFragments;
 
-    public FilterViewPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public FilterViewPagerAdapter(FragmentManager fm, List<FilterDetailFragment> fragments) {
         super(fm);
         mFragments = fragments;
     }
@@ -28,5 +30,11 @@ public class FilterViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return mFragments.size();
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mFragments.get(position).getFilterType();
     }
 }

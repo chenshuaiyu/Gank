@@ -3,17 +3,18 @@ package com.example.chen.gank.ui.filter;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.chen.gank.Constants;
+import com.example.chen.gank.Inject;
 import com.example.chen.gank.R;
 import com.example.chen.gank.ui.adapter.FilterViewPagerAdapter;
 import com.example.chen.gank.ui.base.BaseFragment;
 import com.flyco.tablayout.SlidingTabLayout;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 /**
@@ -23,8 +24,10 @@ import androidx.viewpager.widget.ViewPager;
 public class FilterFragment extends BaseFragment {
     private SlidingTabLayout mTabLayout;
     private ViewPager mViewPager;
-    private List<Fragment> mFragments;
+
+    private List<FilterDetailFragment> mFragments;
     private FilterViewPagerAdapter mFilterViewPagerAdapter;
+    private FilterViewModel mViewModel;
 
     @Override
     public int getLayoutId() {
@@ -37,8 +40,13 @@ public class FilterFragment extends BaseFragment {
         mTabLayout = view.findViewById(R.id.tab_layout);
         mViewPager = view.findViewById(R.id.view_pager);
 
+        mViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(FilterViewModel.class);
+
         mFragments = new ArrayList<>();
-        mFilterViewPagerAdapter = new FilterViewPagerAdapter(getFragmentManager(), mFragments);
+        for (String type : Constants.FILTER_TYPE) {
+            mFragments.add(new FilterDetailFragment(type));
+        }
+        mFilterViewPagerAdapter = new FilterViewPagerAdapter(getChildFragmentManager(), mFragments);
         mViewPager.setAdapter(mFilterViewPagerAdapter);
         mTabLayout.setViewPager(mViewPager);
     }

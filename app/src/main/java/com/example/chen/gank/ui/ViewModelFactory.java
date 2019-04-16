@@ -1,6 +1,10 @@
 package com.example.chen.gank.ui;
 
 import com.example.chen.gank.data.source.GankDailyRepository;
+import com.example.chen.gank.data.source.GankFilterRepository;
+import com.example.chen.gank.ui.filter.FilterViewModel;
+import com.example.chen.gank.ui.latest.LatestViewModel;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,9 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private GankDailyRepository mGankDailyRepository;
+    private GankFilterRepository mGankFilterRepository;
 
-    public ViewModelFactory(GankDailyRepository gankDailyRepository) {
+
+    public ViewModelFactory(GankDailyRepository gankDailyRepository, GankFilterRepository gankFilterRepository) {
         mGankDailyRepository = gankDailyRepository;
+        mGankFilterRepository = gankFilterRepository;
     }
 
     @NonNull
@@ -22,6 +29,10 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         T t = null;
         if (modelClass.isAssignableFrom(MainViewModel.class))
             t = (T) new MainViewModel(mGankDailyRepository);
+        else if (modelClass.isAssignableFrom(LatestViewModel.class))
+            t = (T) new LatestViewModel(mGankDailyRepository);
+        else if (modelClass.isAssignableFrom(FilterViewModel.class))
+            t = (T) new FilterViewModel(mGankFilterRepository);
         return t;
     }
 }
