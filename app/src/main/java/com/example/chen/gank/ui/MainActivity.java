@@ -1,33 +1,22 @@
 package com.example.chen.gank.ui;
 
 import android.os.Bundle;
-
-import com.example.chen.gank.Inject;
 import com.example.chen.gank.R;
-import com.example.chen.gank.data.bean.Gank;
-import com.example.chen.gank.data.bean.GankDailyResult;
 import com.example.chen.gank.ui.filter.FilterFragment;
 import com.example.chen.gank.ui.latest.LatestFragment;
+import com.example.chen.gank.ui.meizhi.MeiZhiFragment;
 import com.example.chen.gank.utils.BNVUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,29 +27,44 @@ public class MainActivity extends AppCompatActivity {
     private Fragment mCurFragment;
     private LatestFragment mLatestFragment;
     private FilterFragment mFilterFragment;
+    private MeiZhiFragment mMeiZhiFragment;
     private FragmentManager mFragmentManager;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
-        FragmentTransaction transaction = mFragmentManager.beginTransaction().hide(mCurFragment);
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
         switch (item.getItemId()) {
             case R.id.navigation_latest:
-                if (mCurFragment != mLatestFragment)
+                if (mCurFragment != mLatestFragment) {
+                    transaction
+                            .hide(mCurFragment)
+                            .show(mLatestFragment);
                     mCurFragment = mLatestFragment;
+                }
                 break;
             case R.id.navigation_filter:
-                if (mCurFragment != mFilterFragment)
+                if (mCurFragment != mFilterFragment) {
+                    transaction
+                            .hide(mCurFragment)
+                            .show(mFilterFragment);
                     mCurFragment = mFilterFragment;
+                }
                 break;
             case R.id.navigation_meizhi:
+                if (mCurFragment != mMeiZhiFragment){
+                    transaction
+                            .hide(mCurFragment)
+                            .show(mMeiZhiFragment);
+                    mCurFragment = mMeiZhiFragment;
+                }
                 break;
             case R.id.navigation_collections:
                 break;
             default:
                 break;
         }
-        transaction.show(mCurFragment).commit();
+        transaction.commit();
         return true;
     };
 
@@ -82,13 +86,19 @@ public class MainActivity extends AppCompatActivity {
 
         mLatestFragment = new LatestFragment();
         mFilterFragment = new FilterFragment();
+        mMeiZhiFragment = new MeiZhiFragment();
         mCurFragment = mLatestFragment;
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, mLatestFragment)
                 .add(R.id.fragment_container, mFilterFragment)
+                .add(R.id.fragment_container, mMeiZhiFragment)
+                .hide(mLatestFragment)
                 .hide(mFilterFragment)
+                .hide(mMeiZhiFragment)
+                .show(mCurFragment)
                 .commit();
+
 
 //        MainViewModel mainViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(MainViewModel.class);
 //        mainViewModel.getGankDailyResults()
@@ -111,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search:
+                break;
+            case R.id.date:
+                mLatestFragment.onOptionsItemSelected(item);
                 break;
             default:
                 break;

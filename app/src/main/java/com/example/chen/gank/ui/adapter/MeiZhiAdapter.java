@@ -1,7 +1,6 @@
 package com.example.chen.gank.ui.adapter;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,25 +15,20 @@ import androidx.annotation.Nullable;
 
 /**
  * Coder : chenshuaiyu
- * Time : 2019/4/16 14:52
+ * Time : 2019/4/16 21:36
  */
-public class GankBeanAdapter extends BaseQuickAdapter<Gank, BaseViewHolder> {
+public class MeiZhiAdapter extends BaseQuickAdapter<Gank, BaseViewHolder> {
     private Context mContext;
 
-    public GankBeanAdapter(int layoutResId, Context context, @Nullable List<Gank> data) {
+    public MeiZhiAdapter(int layoutResId, Context context, @Nullable List<Gank> data) {
         super(layoutResId, data);
         mContext = context;
     }
 
+
     @Override
     protected void convert(BaseViewHolder helper, Gank item) {
-        helper.setText(R.id.article_title, item.getDesc());
-        helper.setText(R.id.author, item.getWho());
-        helper.setText(R.id.date, item.getPublishedAt().substring(0, item.getPublishedAt().indexOf("T")));
         ImageView image = helper.getView(R.id.image);
-        if (item.getImages() != null && item.getImages().size() != 0) {
-            image.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(item.getImages().get(0)).into(image);
-        }
+        Glide.with(mContext).load(item.getUrl()).into(image);
     }
 }

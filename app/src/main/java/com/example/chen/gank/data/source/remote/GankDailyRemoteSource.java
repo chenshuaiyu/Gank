@@ -1,7 +1,10 @@
 package com.example.chen.gank.data.source.remote;
 
+import android.util.Log;
+
 import com.example.chen.gank.data.api.Api;
 import com.example.chen.gank.data.api.RetrofitClient;
+import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.data.bean.GankDailyResult;
 import com.example.chen.gank.data.source.GankDailySource;
 import androidx.lifecycle.MutableLiveData;
@@ -37,6 +40,60 @@ public class GankDailyRemoteSource implements GankDailySource {
     public MutableLiveData<GankDailyResult> getGankDailyResults() {
         MutableLiveData<GankDailyResult> liveData = new MutableLiveData<>();
         mApi.getDaily()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<GankDailyResult>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(GankDailyResult gankDailyResult) {
+                        liveData.setValue(gankDailyResult);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+        return liveData;
+    }
+
+    @Override
+    public MutableLiveData<Day> getDayHistory() {
+        MutableLiveData<Day> liveData = new MutableLiveData<>();
+        mApi.getDayHistory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Day>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(Day day) {
+                        liveData.setValue(day);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+        return liveData;
+    }
+
+    @Override
+    public MutableLiveData<GankDailyResult> getDay(String year, String month, String day) {
+        MutableLiveData<GankDailyResult> liveData = new MutableLiveData<>();
+        mApi.getDay(year, month, day)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GankDailyResult>() {

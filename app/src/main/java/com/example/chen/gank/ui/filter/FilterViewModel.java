@@ -2,7 +2,6 @@ package com.example.chen.gank.ui.filter;
 
 import com.example.chen.gank.data.bean.GankFilterResult;
 import com.example.chen.gank.data.source.GankFilterRepository;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 

@@ -2,7 +2,6 @@ package com.example.chen.gank.ui.filter;
 
 import android.os.Bundle;
 import android.view.View;
-
 import com.example.chen.gank.Constants;
 import com.example.chen.gank.Inject;
 import com.example.chen.gank.R;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
