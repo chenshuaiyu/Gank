@@ -14,4 +14,9 @@ public class Constants {
             "拓展资源",
             "休息视频"
     };
+
+    //Intent key
+    public static final String GANK = "gank";
+    public static final String DAY = "day";
+
 }

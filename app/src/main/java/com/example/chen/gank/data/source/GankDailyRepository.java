@@ -1,9 +1,12 @@
 package com.example.chen.gank.data.source;
 
 import com.example.chen.gank.data.bean.Day;
+import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
 import com.example.chen.gank.data.source.local.GankDailyLocalSource;
 import com.example.chen.gank.data.source.remote.GankDailyRemoteSource;
+
+import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -45,5 +48,15 @@ public class GankDailyRepository implements GankDailySource {
     @Override
     public MutableLiveData<GankDailyResult> getDay(String year, String month, String day) {
         return mDailyRemoteSource.getDay(year, month, day);
+    }
+
+    @Override
+    public void collectGank(Gank gank) {
+        mDailyLocalSource.collectGank(gank);
+    }
+
+    @Override
+    public MutableLiveData<List<Gank>> getGanks() {
+        return mDailyLocalSource.getGanks();
     }
 }

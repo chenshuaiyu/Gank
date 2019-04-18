@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.date:
                 mLatestFragment.onOptionsItemSelected(item);
                 break;
+            case R.id.commit:
+                mFilterFragment.onOptionsItemSelected(item);
+                break;
             default:
                 break;
         }

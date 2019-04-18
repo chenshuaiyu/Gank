@@ -1,11 +1,14 @@
 package com.example.chen.gank.ui.filter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import com.example.chen.gank.Constants;
 import com.example.chen.gank.Inject;
 import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Gank;
+import com.example.chen.gank.ui.GankDetailActivity;
 import com.example.chen.gank.ui.adapter.FilterDetailAdapter;
 import com.example.chen.gank.ui.base.BaseFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -70,6 +73,11 @@ public class FilterDetailFragment extends BaseFragment {
         mAdapter = new FilterDetailAdapter(R.layout.item_gank, getActivity(), mGanks);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            Intent intent = new Intent(getActivity(), GankDetailActivity.class);
+            intent.putExtra(Constants.GANK, mGanks.get(position));
+            startActivity(intent);
+        });
 
         getData();
     }

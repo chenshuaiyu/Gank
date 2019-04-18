@@ -1,16 +1,20 @@
 package com.example.chen.gank.data.bean;
 
+import java.io.Serializable;
 import java.util.List;
 import androidx.annotation.NonNull;
-//import androidx.room.Entity;
-//import androidx.room.PrimaryKey;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 /**
  * Coder : chenshuaiyu
  * Time : 2019/4/14 9:24
  */
-//@Entity(tableName = "Gank")
-public class Gank {
+@Entity(tableName = "Ganks")
+public class Gank implements Serializable {
+    private static final long serialVersionUID = 3064468536540085893L;
     /**
      * _id : 5bbb01af9d21226111b86f0d
      * createdAt : 2018-10-08T07:05:19.297Z
@@ -24,17 +28,27 @@ public class Gank {
      * images : ["https://ww1.sinaimg.cn/large/0073sXn7ly1g1p96mf7zlj308c0pfjtm","https://ww1.sinaimg.cn/large/0073sXn7ly1g1p96mlxyxj308c0go748","https://ww1.sinaimg.cn/large/0073sXn7ly1g1p96mw2gaj30k30bv406","https://ww1.sinaimg.cn/large/0073sXn7ly1g1p96n3bp6j308c0et0tm","https://ww1.sinaimg.cn/large/0073sXn7ly1g1p96n9715j308c0goq3f"]
      */
 
-//    @PrimaryKey
-//    @NonNull
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     private String _id;
+    @Ignore
     private String createdAt;
+    @ColumnInfo(name = "title")
     private String desc;
+    @Ignore
     private String publishedAt;
+    @Ignore
     private String source;
+    @Ignore
     private String type;
+    @ColumnInfo(name = "url")
     private String url;
+    @Ignore
     private boolean used;
+    @Ignore
     private String who;
+    @Ignore
     private List<String> images;
 
     public String get_id() {

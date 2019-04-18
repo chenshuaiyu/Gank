@@ -4,6 +4,8 @@ import com.example.chen.gank.data.source.GankDailyRepository;
 import com.example.chen.gank.data.source.GankFilterRepository;
 import com.example.chen.gank.ui.filter.FilterViewModel;
 import com.example.chen.gank.ui.latest.LatestViewModel;
+import com.example.chen.gank.ui.latest.MoreDayActivity;
+import com.example.chen.gank.ui.latest.MoreDayViewModel;
 import com.example.chen.gank.ui.meizhi.MeiZhiViewModel;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             t = (T) new FilterViewModel(mGankFilterRepository);
         else if (modelClass.isAssignableFrom(MeiZhiViewModel.class))
             t = (T) new MeiZhiViewModel(mGankFilterRepository);
+        else if (modelClass.isAssignableFrom(MoreDayActivity.class))
+            t = (T) new MoreDayViewModel(mGankDailyRepository);
+
         return t;
     }
 }

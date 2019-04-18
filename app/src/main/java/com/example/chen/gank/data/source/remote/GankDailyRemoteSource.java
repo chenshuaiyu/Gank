@@ -5,8 +5,12 @@ import android.util.Log;
 import com.example.chen.gank.data.api.Api;
 import com.example.chen.gank.data.api.RetrofitClient;
 import com.example.chen.gank.data.bean.Day;
+import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
 import com.example.chen.gank.data.source.GankDailySource;
+
+import java.util.List;
+
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -115,5 +119,15 @@ public class GankDailyRemoteSource implements GankDailySource {
                     }
                 });
         return liveData;
+    }
+
+    @Override
+    public void collectGank(Gank gank) {
+
+    }
+
+    @Override
+    public MutableLiveData<List<Gank>> getGanks() {
+        return null;
     }
 }

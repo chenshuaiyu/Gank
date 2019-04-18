@@ -11,8 +11,11 @@ import android.view.View;
 import com.example.chen.gank.Constants;
 import com.example.chen.gank.Inject;
 import com.example.chen.gank.R;
+import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
+import com.example.chen.gank.ui.GankDetailActivity;
+import com.example.chen.gank.ui.MainActivity;
 import com.example.chen.gank.ui.MeiZhiActivity;
 import com.example.chen.gank.ui.adapter.LatestAdapter;
 import com.example.chen.gank.ui.base.BaseFragment;
@@ -28,6 +31,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +48,9 @@ public class LatestFragment extends BaseFragment {
     private List<Gank> mGanks;
     private LatestAdapter mLatestAdapter;
     private LatestViewModel mViewModel;
+
+    private Day mDay;
+    private List<Gank> mWelfareList;
     private List<String> mDayList;
     private HashMap<String, GankDailyResult> mResults;
 
@@ -61,10 +68,12 @@ public class LatestFragment extends BaseFragment {
         mTabLayout = view.findViewById(R.id.tab_layout);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mGanks = new ArrayList<>();
+        mWelfareList = new ArrayList<>();
         mDayList = new ArrayList<>();
         mResults = new HashMap<>();
 
         setHasOptionsMenu(true);
+        initBanner();
 
         mViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(LatestViewModel.class);
 
@@ -72,16 +81,22 @@ public class LatestFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mLatestAdapter);
         mRecyclerView.setNestedScrollingEnabled(false);
+        mLatestAdapter.setOnClickListener(gank -> {
+            Intent intent = new Intent(getActivity(), GankDetailActivity.class);
+            intent.putExtra(Constants.GANK, gank);
+            startActivity(intent);
+        });
 
-        mViewModel.getGankDailyResults()
-                .observe(this, gankDailyResult -> {
-                            notifyDataSetChanged(gankDailyResult);
-                            Log.d("CCC", "111");
-                        }
-                );
+
+//        mViewModel.getGankDailyResults()
+//                .observe(this, gankDailyResult -> {
+//                            notifyDataSetChanged(gankDailyResult);
+//                        }
+//                );
 
         mViewModel.getDayHistory()
                 .observe(this, day -> {
+                    mDay = day;
                     for (int i = 0; i < 10; i++) {
                         String date = day.getResults().get(i);
                         mDayList.add(date);
@@ -93,14 +108,26 @@ public class LatestFragment extends BaseFragment {
                     }
                     mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_date_white));
                     mTabLayout.setVisibility(View.GONE);
+
+                    String latest = mDayList.get(0);
+                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(latest);
+                    String[] date = latest.split("-");
+                    mViewModel.getDay(date[0], date[1], date[2])
+                            .observe(this, gankDailyResult -> {
+                                        mResults.put(latest, gankDailyResult);
+                                        notifyDataSetChanged(gankDailyResult);
+                                    }
+                            );
                 });
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() < 10){
+                if (tab.getPosition() < 10) {
                     String date = mDayList.get(tab.getPosition());
-                    if (mResults.get(date) != null){
+
+                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(date);
+                    if (mResults.get(date) != null) {
                         GankDailyResult result = mResults.get(date);
 
                         notifyDataSetChanged(result);
@@ -124,11 +151,21 @@ public class LatestFragment extends BaseFragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                if (tab.getPosition() >= 10){
+                if (tab.getPosition() >= 10) {
                     jumpToMoreDay();
                 }
             }
         });
+
+        new Runnable() {
+            @Override
+            public void run() {
+                mViewModel.getGanks()
+                        .observe(LatestFragment.this, ganks -> {
+                            Log.d("CCC", ganks.size() + "");
+                        });
+            }
+        };
     }
 
     private void setData(GankDailyResult.GankDailyData results) {
@@ -190,16 +227,21 @@ public class LatestFragment extends BaseFragment {
         }
     }
 
-    private void setBanner(List<Gank> welfare) {
+    private void initBanner() {
         mBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mBanner.setImageLoader(new GlideImageLoader());
-        mBanner.setImages(welfare);
         mBanner.setBannerAnimation(Transformer.DepthPage);
         mBanner.setDelayTime(2500);
         mBanner.setOnBannerListener(position -> {
-            Gank gank = welfare.get(position);
+            Gank gank = mWelfareList.get(position);
             startActivity(MeiZhiActivity.newIntent(getActivity(), gank.getUrl()));
         });
+    }
+
+    private void setBanner(List<Gank> welfare) {
+        mWelfareList.clear();
+        mWelfareList.addAll(welfare);
+        mBanner.setImages(mWelfareList);
         mBanner.start();
     }
 
@@ -208,7 +250,6 @@ public class LatestFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.latest_menu, menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -237,6 +278,7 @@ public class LatestFragment extends BaseFragment {
 
     private void jumpToMoreDay() {
         Intent intent = new Intent(getActivity(), MoreDayActivity.class);
+        intent.putExtra(Constants.DAY, mDay);
         startActivity(intent);
     }
 }

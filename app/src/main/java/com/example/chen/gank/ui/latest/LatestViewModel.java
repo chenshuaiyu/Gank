@@ -1,8 +1,11 @@
 package com.example.chen.gank.ui.latest;
 
 import com.example.chen.gank.data.bean.Day;
+import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
 import com.example.chen.gank.data.source.GankDailyRepository;
+
+import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -28,5 +31,9 @@ public class LatestViewModel extends ViewModel {
 
     public MutableLiveData<GankDailyResult> getDay(String year, String month, String day){
         return mGankDailyRepository.getDay(year, month, day);
+    }
+
+    public MutableLiveData<List<Gank>> getGanks(){
+        return mGankDailyRepository.getGanks();
     }
 }

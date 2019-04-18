@@ -86,6 +86,7 @@ public class LatestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 image.setVisibility(View.VISIBLE);
                 Glide.with(mContext).load(gank.getImages().get(0)).into(image);
             }
+            itemView.setOnClickListener(v -> mOnClickListener.onClick(gank));
         }
     }
 
@@ -100,5 +101,15 @@ public class LatestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public void bind(Gank gank) {
             title.setText(gank.getDesc());
         }
+    }
+
+    private OnClickListener mOnClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        mOnClickListener = onClickListener;
+    }
+
+    public interface OnClickListener{
+        void onClick(Gank gank);
     }
 }

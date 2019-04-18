@@ -1,6 +1,9 @@
 package com.example.chen.gank.ui.filter;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import com.example.chen.gank.Constants;
 import com.example.chen.gank.Inject;
@@ -38,6 +41,8 @@ public class FilterFragment extends BaseFragment {
         mTabLayout = view.findViewById(R.id.tab_layout);
         mViewPager = view.findViewById(R.id.view_pager);
 
+        setHasOptionsMenu(true);
+
         mViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(FilterViewModel.class);
 
         mFragments = new ArrayList<>();
@@ -47,5 +52,23 @@ public class FilterFragment extends BaseFragment {
         mFilterViewPagerAdapter = new FilterViewPagerAdapter(getChildFragmentManager(), mFragments);
         mViewPager.setAdapter(mFilterViewPagerAdapter);
         mTabLayout.setViewPager(mViewPager);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.filter_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.commit:
+
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
