@@ -1,4 +1,4 @@
-package com.example.chen.gank.ui;
+package com.example.chen.gank.ui.activity;
 
 import com.example.chen.gank.data.bean.GankDailyResult;
 import com.example.chen.gank.data.source.GankDailyRepository;

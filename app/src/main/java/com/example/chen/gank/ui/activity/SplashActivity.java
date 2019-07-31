@@ -1,4 +1,4 @@
-package com.example.chen.gank.ui;
+package com.example.chen.gank.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;

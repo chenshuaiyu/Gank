@@ -1,4 +1,4 @@
-package com.example.chen.gank;
+package com.example.chen.gank.app;
 
 /**
  * Coder : chenshuaiyu

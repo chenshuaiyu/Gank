@@ -1,11 +1,9 @@
-package com.example.chen.gank.ui;
+package com.example.chen.gank.ui.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +12,7 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.example.chen.gank.Constants;
+import com.example.chen.gank.app.Constants;
 import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Gank;
 import com.just.agentweb.AgentWeb;
@@ -66,7 +64,7 @@ public class GankDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.detail_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 

@@ -67,12 +67,13 @@ public class GankDailyLocalSource implements GankDailySource {
 //            }
 //        }
 
-        mGankDao.addGank(gank);
+//        mGankDao.addGank(gank);
     }
 
     @Override
     public MutableLiveData<List<Gank>> getGanks() {
-        return mGankDao.getGanks();
+        return null;
+//        return mGankDao.getGanks();
     }
 
 }

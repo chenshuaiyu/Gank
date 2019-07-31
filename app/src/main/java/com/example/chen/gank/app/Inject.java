@@ -1,4 +1,4 @@
-package com.example.chen.gank;
+package com.example.chen.gank.app;
 
 import com.example.chen.gank.data.source.GankDailyRepository;
 import com.example.chen.gank.data.source.GankFilterRepository;
@@ -22,11 +22,12 @@ public class Inject {
     private static ViewModelFactory mViewModelFactory;
 
     public static ViewModelProvider.Factory getModelFactory() {
-        if (mViewModelFactory == null)
+        if (mViewModelFactory == null) {
             mViewModelFactory = new ViewModelFactory(
                     GankDailyRepository.getInstance(GankDailyLocalSource.getInstance(GankDatabase.getInstance().ganksDao(), sAppExecutors), GankDailyRemoteSource.getInstance()),
                     GankFilterRepository.getInstance(GankFilterLocalSource.getInstance(), GankFilterRemoteSource.getInstance())
             );
+        }
         return mViewModelFactory;
     }
 }

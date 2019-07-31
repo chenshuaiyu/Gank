@@ -8,15 +8,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.chen.gank.Constants;
-import com.example.chen.gank.Inject;
+import com.example.chen.gank.R2;
+import com.example.chen.gank.app.Constants;
+import com.example.chen.gank.app.Inject;
 import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
-import com.example.chen.gank.ui.GankDetailActivity;
-import com.example.chen.gank.ui.MainActivity;
-import com.example.chen.gank.ui.MeiZhiActivity;
+import com.example.chen.gank.ui.activity.GankDetailActivity;
+import com.example.chen.gank.ui.activity.MainActivity;
+import com.example.chen.gank.ui.meizhi.MeiZhiActivity;
 import com.example.chen.gank.ui.adapter.LatestAdapter;
 import com.example.chen.gank.ui.base.BaseFragment;
 import com.example.chen.gank.utils.GlideImageLoader;
@@ -31,20 +32,25 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 
 /**
  * Coder : chenshuaiyu
  * Time : 2019/4/15 20:57
  */
 public class LatestFragment extends BaseFragment {
-    private Banner mBanner;
-    private TabLayout mTabLayout;
 
-    private RecyclerView mRecyclerView;
+    @BindView(R2.id.banner)
+    Banner mBanner;
+    @BindView(R2.id.tab_layout)
+    TabLayout mTabLayout;
+    @BindView(R2.id.recycler_view)
+    RecyclerView mRecyclerView;
+
     private List<Gank> mGanks;
     private LatestAdapter mLatestAdapter;
     private LatestViewModel mViewModel;
@@ -64,9 +70,7 @@ public class LatestFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mBanner = view.findViewById(R.id.banner);
-        mTabLayout = view.findViewById(R.id.tab_layout);
-        mRecyclerView = view.findViewById(R.id.recycler_view);
+
         mGanks = new ArrayList<>();
         mWelfareList = new ArrayList<>();
         mDayList = new ArrayList<>();
@@ -248,7 +252,7 @@ public class LatestFragment extends BaseFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.latest_menu, menu);
+        inflater.inflate(R.menu.menu_latest, menu);
     }
 
     @Override

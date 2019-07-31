@@ -1,26 +1,26 @@
-package com.example.chen.gank.ui;
+package com.example.chen.gank.ui.activity;
 
 import android.os.Bundle;
+
 import com.example.chen.gank.R;
 import com.example.chen.gank.ui.filter.FilterFragment;
 import com.example.chen.gank.ui.latest.LatestFragment;
 import com.example.chen.gank.ui.meizhi.MeiZhiFragment;
 import com.example.chen.gank.utils.BNVUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private BottomNavigationView mBottomNavigationView;
     private Toolbar mToolbar;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.navigation_meizhi:
-                if (mCurFragment != mMeiZhiFragment){
+                if (mCurFragment != mMeiZhiFragment) {
                     transaction
                             .hide(mCurFragment)
                             .show(mMeiZhiFragment);
@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = findViewById(R.id.message);
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mToolbar = findViewById(R.id.toolbar);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

@@ -16,11 +16,11 @@ import androidx.room.Query;
 @Dao
 public interface GankDao {
 
-    @Query("SELECT * FROM Ganks")
-    MutableLiveData<List<Gank>> getGanks();
-
-    @Insert
-    void addGank(Gank gank);
+//    @Query("SELECT * FROM Ganks")
+//    MutableLiveData<List<Gank>> getGanks();
+//
+//    @Insert
+//    void addGank(Gank gank);
 
 
 }

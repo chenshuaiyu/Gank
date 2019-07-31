@@ -1,11 +1,10 @@
-package com.example.chen.gank.ui;
+package com.example.chen.gank.ui.meizhi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;

@@ -10,15 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.chen.gank.Constants;
-import com.example.chen.gank.Inject;
+import com.example.chen.gank.app.Constants;
+import com.example.chen.gank.app.Inject;
 import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.ui.adapter.MoreDayAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MoreDayActivity extends AppCompatActivity {
     private Toolbar mToolbar;

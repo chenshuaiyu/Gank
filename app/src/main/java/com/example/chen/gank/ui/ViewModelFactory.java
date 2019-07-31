@@ -2,6 +2,7 @@ package com.example.chen.gank.ui;
 
 import com.example.chen.gank.data.source.GankDailyRepository;
 import com.example.chen.gank.data.source.GankFilterRepository;
+import com.example.chen.gank.ui.activity.MainViewModel;
 import com.example.chen.gank.ui.filter.FilterViewModel;
 import com.example.chen.gank.ui.latest.LatestViewModel;
 import com.example.chen.gank.ui.latest.MoreDayActivity;
@@ -30,17 +31,17 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         T t = null;
-        if (modelClass.isAssignableFrom(MainViewModel.class))
+        if (modelClass.isAssignableFrom(MainViewModel.class)) {
             t = (T) new MainViewModel(mGankDailyRepository);
-        else if (modelClass.isAssignableFrom(LatestViewModel.class))
+        } else if (modelClass.isAssignableFrom(LatestViewModel.class)) {
             t = (T) new LatestViewModel(mGankDailyRepository);
-        else if (modelClass.isAssignableFrom(FilterViewModel.class))
+        } else if (modelClass.isAssignableFrom(FilterViewModel.class)) {
             t = (T) new FilterViewModel(mGankFilterRepository);
-        else if (modelClass.isAssignableFrom(MeiZhiViewModel.class))
+        } else if (modelClass.isAssignableFrom(MeiZhiViewModel.class)) {
             t = (T) new MeiZhiViewModel(mGankFilterRepository);
-        else if (modelClass.isAssignableFrom(MoreDayActivity.class))
+        } else if (modelClass.isAssignableFrom(MoreDayActivity.class)) {
             t = (T) new MoreDayViewModel(mGankDailyRepository);
-
+        }
         return t;
     }
 }

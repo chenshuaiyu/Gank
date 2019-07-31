@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.chen.gank.Inject;
+import com.example.chen.gank.R2;
+import com.example.chen.gank.app.Inject;
 import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Gank;
-import com.example.chen.gank.ui.MeiZhiActivity;
 import com.example.chen.gank.ui.adapter.MeiZhiAdapter;
 import com.example.chen.gank.ui.base.BaseFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -23,13 +22,18 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import butterknife.BindView;
+
 /**
  * Coder : chenshuaiyu
  * Time : 2019/4/16 21:13
  */
 public class MeiZhiFragment extends BaseFragment {
-    private SmartRefreshLayout mRefreshLayout;
-    private RecyclerView mRecyclerView;
+
+    @BindView(R2.id.recycler_view)
+    SmartRefreshLayout mRefreshLayout;
+    @BindView(R2.id.refresh_layout)
+    RecyclerView mRecyclerView;
 
     private List<Gank> mGanks;
     private MeiZhiAdapter mAdapter;
@@ -45,8 +49,6 @@ public class MeiZhiFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = view.findViewById(R.id.recycler_view);
-        mRefreshLayout = view.findViewById(R.id.refresh_layout);
         mGanks = new ArrayList<>();
 
         mViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(MeiZhiViewModel.class);

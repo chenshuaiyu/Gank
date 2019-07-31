@@ -1,6 +1,6 @@
 package com.example.chen.gank.data.source.local;
 
-import com.example.chen.gank.GankApp;
+import com.example.chen.gank.app.GankApp;
 import com.example.chen.gank.data.bean.Gank;
 
 import androidx.room.Database;
