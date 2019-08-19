@@ -5,7 +5,13 @@
     <item
         android:id="@+id/collect"
         android:title="@string/collect"
-        android:icon="@drawable/ic_dislike_white"
+        android:icon="@drawable/ic_unstar"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/uncollect"
+        android:title="@string/collect"
+        android:icon="@drawable/ic_star"
         app:showAsAction="ifRoom"/>
 
 </menu>

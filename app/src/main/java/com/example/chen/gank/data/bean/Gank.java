@@ -9,8 +9,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 9:24
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 9:24
  */
 @Entity(tableName = "Ganks")
 public class Gank implements Serializable {
@@ -36,7 +36,7 @@ public class Gank implements Serializable {
     private String createdAt;
     @ColumnInfo(name = "title")
     private String desc;
-    @Ignore
+    @ColumnInfo(name = "date")
     private String publishedAt;
     @Ignore
     private String source;
@@ -46,7 +46,7 @@ public class Gank implements Serializable {
     private String url;
     @Ignore
     private boolean used;
-    @Ignore
+    @ColumnInfo(name = "author")
     private String who;
     @Ignore
     private List<String> images;

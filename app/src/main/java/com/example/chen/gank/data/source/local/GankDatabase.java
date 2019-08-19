@@ -8,20 +8,23 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 20:59
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 20:59
  */
 @Database(entities = {Gank.class}, version = 1, exportSchema = false)
 public abstract class GankDatabase extends RoomDatabase {
-    private static GankDatabase INSTANCE;
+    private static volatile GankDatabase INSTANCE;
 
-    private static final Object sLock = new Object();
-
+    /**
+     * 获取 Gank DAO
+     *
+     * @return
+     */
     public abstract GankDao ganksDao();
 
     public static GankDatabase getInstance() {
         if (INSTANCE == null) {
-            synchronized (sLock) {
+            synchronized (GankDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room
                             .databaseBuilder(GankApp.getApp(), GankDatabase.class, "Ganks.db")

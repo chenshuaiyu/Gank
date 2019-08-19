@@ -70,7 +70,7 @@ public abstract class BaseQuickDiffCallback<T> extends DiffUtil.Callback {
     /**
      * @param oldItem New data
      * @param newItem old Data
-     * @return Return false if item content are no same
+     * @return Return false if item_text content are no same
      */
     protected abstract boolean areContentsTheSame(@NonNull T oldItem, @NonNull T newItem);
 

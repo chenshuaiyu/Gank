@@ -5,8 +5,8 @@ import com.example.chen.gank.data.source.GankFilterSource;
 import androidx.lifecycle.MutableLiveData;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 20:15
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 20:15
  */
 public class GankFilterLocalSource implements GankFilterSource {
     private static GankFilterLocalSource sGankFilterLocalSource;
@@ -17,8 +17,9 @@ public class GankFilterLocalSource implements GankFilterSource {
     public static GankFilterLocalSource getInstance() {
         if (sGankFilterLocalSource == null){
             synchronized (GankFilterLocalSource.class){
-                if (sGankFilterLocalSource == null)
+                if (sGankFilterLocalSource == null) {
                     sGankFilterLocalSource = new GankFilterLocalSource();
+                }
             }
         }
         return sGankFilterLocalSource;

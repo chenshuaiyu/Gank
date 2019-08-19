@@ -7,8 +7,8 @@ import com.example.chen.gank.data.source.remote.GankFilterRemoteSource;
 import androidx.lifecycle.MutableLiveData;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 20:09
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 20:09
  */
 public class GankFilterRepository implements GankFilterSource {
     private static GankFilterRepository sGankFilterRepository;
@@ -24,8 +24,9 @@ public class GankFilterRepository implements GankFilterSource {
     public static GankFilterRepository getInstance(GankFilterLocalSource gankFilterLocalSource, GankFilterRemoteSource gankFilterRemoteSource) {
         if (sGankFilterRepository == null) {
             synchronized (GankFilterRepository.class) {
-                if (sGankFilterRepository == null)
+                if (sGankFilterRepository == null) {
                     sGankFilterRepository = new GankFilterRepository(gankFilterLocalSource, gankFilterRemoteSource);
+                }
             }
         }
         return sGankFilterRepository;

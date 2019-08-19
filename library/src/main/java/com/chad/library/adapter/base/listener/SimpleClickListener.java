@@ -22,7 +22,7 @@ import static com.chad.library.adapter.base.BaseQuickAdapter.LOADING_VIEW;
  * Created by AllenCoder on 2016/8/03.
  * <p>
  * This can be useful for applications that wish to implement various forms of click and longclick and childView click
- * manipulation of item views within the RecyclerView. SimpleClickListener may intercept
+ * manipulation of item_text views within the RecyclerView. SimpleClickListener may intercept
  * a touch interaction already in progress even if the SimpleClickListener is already handling that
  * gesture stream itself for the purposes of scrolling.
  *
@@ -250,7 +250,7 @@ public abstract class SimpleClickListener implements RecyclerView.OnItemTouchLis
     }
 
     /**
-     * Callback method to be invoked when an item in this AdapterView has
+     * Callback method to be invoked when an item_text in this AdapterView has
      * been clicked.
      * @param adapter
      * @param view     The view within the AdapterView that was clicked (this
@@ -260,7 +260,7 @@ public abstract class SimpleClickListener implements RecyclerView.OnItemTouchLis
     public abstract void onItemClick(BaseQuickAdapter adapter, View view, int position);
 
     /**
-     * callback method to be invoked when an item in this view has been
+     * callback method to be invoked when an item_text in this view has been
      * click and held
      * @param adapter
      * @param view     The view whihin the AbsListView that was clicked
@@ -277,7 +277,7 @@ public abstract class SimpleClickListener implements RecyclerView.OnItemTouchLis
      */
     public abstract void onItemChildClick(BaseQuickAdapter adapter, View view, int position);
     /**
-     * callback method to be invoked when an item in this view has been
+     * callback method to be invoked when an item_text in this view has been
      * click and held
      * @param adapter
      * @param view     The view whihin the AbsListView that was clicked

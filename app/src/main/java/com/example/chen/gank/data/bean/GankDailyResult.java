@@ -2,13 +2,15 @@ package com.example.chen.gank.data.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/13 10:39
+ * @author : chenshuaiyu
+ * @date : 2019/4/13 10:39
  */
-public class GankDailyResult {
+public class GankDailyResult implements Serializable {
+    private static final long serialVersionUID = -8209084000199862366L;
 
     /**
      * category : ["iOS","拓展资源","瞎推荐","Android","App","休息视频","福利","前端"]
@@ -44,7 +46,9 @@ public class GankDailyResult {
         this.category = category;
     }
 
-    public static class GankDailyData {
+    public static class GankDailyData implements Serializable {
+        private static final long serialVersionUID = 1619197483807228265L;
+
         @SerializedName("Android")
         private List<Gank> android;
         @SerializedName("App")

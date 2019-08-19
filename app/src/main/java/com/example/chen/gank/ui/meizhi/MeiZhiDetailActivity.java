@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.chen.gank.R;
 
-public class MeiZhiActivity extends AppCompatActivity {
+/**
+ * @author : chenshuaiyu
+ */
+public class MeiZhiDetailActivity extends AppCompatActivity {
     private ImageView image;
 
     public static Intent newIntent(Context context, String url) {
-        Intent intent = new Intent(context, MeiZhiActivity.class);
+        Intent intent = new Intent(context, MeiZhiDetailActivity.class);
         intent.putExtra("url", url);
         return intent;
     }

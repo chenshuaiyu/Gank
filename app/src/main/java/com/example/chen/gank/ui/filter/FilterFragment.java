@@ -1,5 +1,6 @@
 package com.example.chen.gank.ui.filter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +13,7 @@ import com.example.chen.gank.app.Inject;
 import com.example.chen.gank.R;
 import com.example.chen.gank.ui.adapter.FilterViewPagerAdapter;
 import com.example.chen.gank.ui.base.BaseFragment;
+import com.example.chen.gank.ui.submit.SubmitActivity;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
@@ -25,8 +27,8 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/15 20:19
+ * @author : chenshuaiyu
+ * @date : 2019/4/15 20:19
  */
 public class FilterFragment extends BaseFragment {
     @BindView(R2.id.tab_layout)
@@ -57,7 +59,7 @@ public class FilterFragment extends BaseFragment {
         }
         mFilterViewPagerAdapter = new FilterViewPagerAdapter(getChildFragmentManager(), mFragments);
         mViewPager.setAdapter(mFilterViewPagerAdapter);
-//        mTabLayout.setViewPager(mViewPager);//androidx问题
+        mTabLayout.setViewPager(mViewPager);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class FilterFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.commit:
-
+                startActivity(new Intent(getActivity(), SubmitActivity.class));
                 break;
             default:
                 break;

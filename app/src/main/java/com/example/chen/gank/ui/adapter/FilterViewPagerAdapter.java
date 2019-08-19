@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/15 22:22
+ * @author : chenshuaiyu
+ * @date : 2019/4/15 22:22
  */
 public class FilterViewPagerAdapter extends FragmentPagerAdapter {
     private List<FilterDetailFragment> mFragments;

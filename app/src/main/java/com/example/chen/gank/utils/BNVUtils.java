@@ -6,8 +6,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/3/17 15:10
+ * @author : chenshuaiyu
+ * @date : 2019/3/17 15:10
  */
 public class BNVUtils {
     @SuppressLint({"RestrictedApi", "WrongConstant"})

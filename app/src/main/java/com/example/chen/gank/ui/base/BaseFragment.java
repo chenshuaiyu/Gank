@@ -14,13 +14,18 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/15 20:58
+ * @author : chenshuaiyu
+ * @date : 2019/4/15 20:58
  */
 public abstract class BaseFragment extends Fragment {
 
     private Unbinder mUnbinder;
 
+    /**
+     * 获取布局Id
+     *
+     * @return
+     */
     @LayoutRes
     public abstract int getLayoutId();
 

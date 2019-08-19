@@ -1,4 +1,4 @@
-package com.example.chen.gank.ui.activity;
+package com.example.chen.gank.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.chen.gank.R;
+import com.example.chen.gank.ui.main.MainActivity;
 
+/**
+ * @author : chenshuaiyu
+ */
 public class SplashActivity extends AppCompatActivity {
 
     @Override

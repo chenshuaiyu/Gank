@@ -7,8 +7,8 @@ import java.util.concurrent.Executors;
 import androidx.annotation.NonNull;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/1/31 20:53
+ * @author : chenshuaiyu
+ * @date : 2019/1/31 20:53
  */
 public class AppExecutors {
     private static final int THREAD_COUNT = 3;

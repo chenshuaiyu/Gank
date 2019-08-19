@@ -31,7 +31,7 @@ public abstract class BaseSectionMultiItemQuickAdapter<T extends SectionMultiEnt
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
      *
-     * @param sectionHeadResId The section head layout id for each item
+     * @param sectionHeadResId The section head layout id for each item_text
      * @param data             A new list is created out of this one to avoid mutable list
      */
     public BaseSectionMultiItemQuickAdapter(int sectionHeadResId, List<T> data) {
@@ -44,7 +44,7 @@ public abstract class BaseSectionMultiItemQuickAdapter<T extends SectionMultiEnt
         T item = mData.get(position);
 
         if (item != null) {
-            // check the item type include header or not
+            // check the item_text type include header or not
             return item.isHeader ? SECTION_HEADER_VIEW : item.getItemType();
         }
         return DEFAULT_VIEW_TYPE;

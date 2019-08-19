@@ -13,11 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ui.activity.GankDetailActivity" />
+        <activity android:name=".ui.latest.DayDetailActivity"></activity>
+        <activity android:name=".ui.submit.SubmitActivity" />
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.detail.GankDetailActivity" />
         <activity android:name=".ui.latest.MoreDayActivity" />
-        <activity android:name=".ui.meizhi.MeiZhiActivity" />
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity android:name=".ui.meizhi.MeiZhiDetailActivity" />
+        <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,9 +27,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/app_name" />
-
     </application>
 
 </manifest>

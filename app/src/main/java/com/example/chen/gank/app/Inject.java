@@ -13,8 +13,8 @@ import com.example.chen.gank.utils.AppExecutors;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/13 10:08
+ * @author : chenshuaiyu
+ * @date : 2019/4/13 10:08
  */
 public class Inject {
     private static AppExecutors sAppExecutors = new AppExecutors();

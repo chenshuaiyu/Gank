@@ -1,6 +1,5 @@
 package com.example.chen.gank.ui.latest;
 
-import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.data.bean.GankDailyResult;
 import com.example.chen.gank.data.source.GankDailyRepository;
 
@@ -8,8 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/17 21:44
+ * @author : chenshuaiyu
+ * @date : 2019/4/17 21:44
  */
 public class MoreDayViewModel extends ViewModel {
     private GankDailyRepository mGankDailyRepository;

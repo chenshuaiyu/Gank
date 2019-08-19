@@ -1,8 +1,9 @@
 package com.example.chen.gank.ui.latest;
 
+import android.animation.IntEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,9 +16,9 @@ import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
-import com.example.chen.gank.ui.activity.GankDetailActivity;
-import com.example.chen.gank.ui.activity.MainActivity;
-import com.example.chen.gank.ui.meizhi.MeiZhiActivity;
+import com.example.chen.gank.ui.main.MainActivity;
+import com.example.chen.gank.ui.detail.GankDetailActivity;
+import com.example.chen.gank.ui.meizhi.MeiZhiDetailActivity;
 import com.example.chen.gank.ui.adapter.LatestAdapter;
 import com.example.chen.gank.ui.base.BaseFragment;
 import com.example.chen.gank.utils.GlideImageLoader;
@@ -39,8 +40,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/15 20:57
+ * @author chenshuaiyu
+ * @date : 2019/4/15 20:57
  */
 public class LatestFragment extends BaseFragment {
 
@@ -60,7 +61,15 @@ public class LatestFragment extends BaseFragment {
     private List<String> mDayList;
     private HashMap<String, GankDailyResult> mResults;
 
+    private int mTablayoutHeight;
     private boolean isDayHistoryShow = false;
+
+    private String mCurrentTitle = "Gank";
+    private int defaultSize = 10;
+
+    public String getCurrentTitle() {
+        return mCurrentTitle;
+    }
 
     @Override
     public int getLayoutId() {
@@ -74,7 +83,7 @@ public class LatestFragment extends BaseFragment {
         mGanks = new ArrayList<>();
         mWelfareList = new ArrayList<>();
         mDayList = new ArrayList<>();
-        mResults = new HashMap<>();
+        mResults = new HashMap<>(14);
 
         setHasOptionsMenu(true);
         initBanner();
@@ -86,22 +95,13 @@ public class LatestFragment extends BaseFragment {
         mRecyclerView.setAdapter(mLatestAdapter);
         mRecyclerView.setNestedScrollingEnabled(false);
         mLatestAdapter.setOnClickListener(gank -> {
-            Intent intent = new Intent(getActivity(), GankDetailActivity.class);
-            intent.putExtra(Constants.GANK, gank);
-            startActivity(intent);
+            startActivity(GankDetailActivity.newIntent(getActivity(), gank));
         });
-
-
-//        mViewModel.getGankDailyResults()
-//                .observe(this, gankDailyResult -> {
-//                            notifyDataSetChanged(gankDailyResult);
-//                        }
-//                );
 
         mViewModel.getDayHistory()
                 .observe(this, day -> {
                     mDay = day;
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < defaultSize; i++) {
                         String date = day.getResults().get(i);
                         mDayList.add(date);
                         mResults.put(date, null);
@@ -111,65 +111,58 @@ public class LatestFragment extends BaseFragment {
                         mTabLayout.addTab(mTabLayout.newTab().setText(s));
                     }
                     mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_date_white));
-                    mTabLayout.setVisibility(View.GONE);
+                    mTablayoutHeight = mTabLayout.getHeight();
+                    tablayoutAnimate(mTabLayout, mTablayoutHeight, 0, 0);
 
-                    String latest = mDayList.get(0);
-                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(latest);
-                    String[] date = latest.split("-");
+                    mCurrentTitle = mDayList.get(0);
+                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(mCurrentTitle);
+                    String[] date = mCurrentTitle.split("-");
                     mViewModel.getDay(date[0], date[1], date[2])
                             .observe(this, gankDailyResult -> {
-                                        mResults.put(latest, gankDailyResult);
+                                        mResults.put(mCurrentTitle, gankDailyResult);
                                         notifyDataSetChanged(gankDailyResult);
                                     }
                             );
                 });
 
+        tabSelect();
+    }
+
+    private void tabSelect() {
         mTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+            private int lastPosition;
+
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() < 10) {
-                    String date = mDayList.get(tab.getPosition());
-
-                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(date);
-                    if (mResults.get(date) != null) {
-                        GankDailyResult result = mResults.get(date);
-
+                if (tab.getPosition() < defaultSize) {
+                    mCurrentTitle = mDayList.get(tab.getPosition());
+                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(mCurrentTitle);
+                    if (mResults.get(mCurrentTitle) != null) {
+                        GankDailyResult result = mResults.get(mCurrentTitle);
                         notifyDataSetChanged(result);
                     } else {
-                        String[] split = date.split("-");
+                        String[] split = mCurrentTitle.split("-");
                         mViewModel.getDay(split[0], split[1], split[2])
                                 .observe(LatestFragment.this, gankDailyResult -> {
-                                    mResults.put(date, gankDailyResult);
-
+                                    mResults.put(mCurrentTitle, gankDailyResult);
                                     notifyDataSetChanged(gankDailyResult);
                                 });
                     }
                 } else {
                     jumpToMoreDay();
+                    mTabLayout.getTabAt(lastPosition).select();
                 }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                lastPosition = tab.getPosition();
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                if (tab.getPosition() >= 10) {
-                    jumpToMoreDay();
-                }
             }
         });
-
-        new Runnable() {
-            @Override
-            public void run() {
-                mViewModel.getGanks()
-                        .observe(LatestFragment.this, ganks -> {
-                            Log.d("CCC", ganks.size() + "");
-                        });
-            }
-        };
     }
 
     private void setData(GankDailyResult.GankDailyData results) {
@@ -238,13 +231,15 @@ public class LatestFragment extends BaseFragment {
         mBanner.setDelayTime(2500);
         mBanner.setOnBannerListener(position -> {
             Gank gank = mWelfareList.get(position);
-            startActivity(MeiZhiActivity.newIntent(getActivity(), gank.getUrl()));
+            startActivity(MeiZhiDetailActivity.newIntent(getActivity(), gank.getUrl()));
         });
     }
 
     private void setBanner(List<Gank> welfare) {
         mWelfareList.clear();
-        mWelfareList.addAll(welfare);
+        if (welfare != null && welfare.size() != 0) {
+            mWelfareList.addAll(welfare);
+        }
         mBanner.setImages(mWelfareList);
         mBanner.start();
     }
@@ -260,10 +255,10 @@ public class LatestFragment extends BaseFragment {
         switch (item.getItemId()) {
             case R.id.date:
                 if (!isDayHistoryShow) {
-                    mTabLayout.setVisibility(View.VISIBLE);
+                    tablayoutAnimate(mTabLayout, 0, mTablayoutHeight, 300);
                     isDayHistoryShow = true;
                 } else {
-                    mTabLayout.setVisibility(View.GONE);
+                    tablayoutAnimate(mTabLayout, mTablayoutHeight, 0, 300);
                     isDayHistoryShow = false;
                 }
                 break;
@@ -271,6 +266,16 @@ public class LatestFragment extends BaseFragment {
                 break;
         }
         return true;
+    }
+
+    private void tablayoutAnimate(View view, int start, int end, long duration) {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(start, end);
+        IntEvaluator intEvaluator = new IntEvaluator();
+        valueAnimator.addUpdateListener(animation -> {
+            view.getLayoutParams().height = intEvaluator.evaluate(animation.getAnimatedFraction(), start, end);
+            view.requestLayout();
+        });
+        valueAnimator.setDuration(duration).start();
     }
 
     private void notifyDataSetChanged(GankDailyResult gankDailyResult) {

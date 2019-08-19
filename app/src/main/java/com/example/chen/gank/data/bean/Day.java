@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/17 19:25
+ * @author : chenshuaiyu
+ * @date : 2019/4/17 19:25
  */
 public class Day implements Serializable {
     private static final long serialVersionUID = -458483231360243796L;

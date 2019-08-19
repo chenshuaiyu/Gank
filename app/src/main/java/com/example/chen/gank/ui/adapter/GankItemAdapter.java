@@ -15,13 +15,13 @@ import java.util.List;
 import androidx.annotation.Nullable;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/16 14:52
+ * @author : chenshuaiyu
+ * @date : 2019/4/16 14:52
  */
-public class FilterDetailAdapter extends BaseQuickAdapter<Gank, BaseViewHolder> {
+public class GankItemAdapter extends BaseQuickAdapter<Gank, BaseViewHolder> {
     private Context mContext;
 
-    public FilterDetailAdapter(int layoutResId, Context context, @Nullable List<Gank> data) {
+    public GankItemAdapter(int layoutResId, Context context, @Nullable List<Gank> data) {
         super(layoutResId, data);
         mContext = context;
     }

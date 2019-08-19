@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/16 21:15
+ * @author : chenshuaiyu
+ * @date : 2019/4/16 21:15
  */
 public class MeiZhiViewModel extends ViewModel {
     private GankFilterRepository mGankFilterRepository;

@@ -3,6 +3,9 @@ package com.example.chen.gank.ui.meizhi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.chen.gank.R2;
@@ -25,19 +28,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/16 21:13
+ * @author : chenshuaiyu
+ * @date : 2019/4/16 21:13
  */
 public class MeiZhiFragment extends BaseFragment {
 
-    @BindView(R2.id.recycler_view)
-    SmartRefreshLayout mRefreshLayout;
     @BindView(R2.id.refresh_layout)
+    SmartRefreshLayout mRefreshLayout;
+    @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
 
     private List<Gank> mGanks;
     private MeiZhiAdapter mAdapter;
     private MeiZhiViewModel mViewModel;
+
+    private GridLayoutManager gridLayoutManager1;
+    private GridLayoutManager gridLayoutManager2;
 
     private int curPage = 1;
 
@@ -49,8 +55,9 @@ public class MeiZhiFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mGanks = new ArrayList<>();
+        setHasOptionsMenu(true);
 
+        mGanks = new ArrayList<>();
         mViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(MeiZhiViewModel.class);
 
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
@@ -65,14 +72,16 @@ public class MeiZhiFragment extends BaseFragment {
         });
 
         mAdapter = new MeiZhiAdapter(R.layout.item_image, getActivity(), mGanks);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
+        gridLayoutManager1 = new GridLayoutManager(getActivity(), 1);
+        gridLayoutManager2 = new GridLayoutManager(getActivity(), 2);
+
+        mRecyclerView.setLayoutManager(gridLayoutManager2);
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             Gank gank = mGanks.get(position);
             if (!TextUtils.isEmpty(gank.getUrl())) {
-                Intent intent = MeiZhiActivity.newIntent(getActivity(), gank.getUrl());
+                Intent intent = MeiZhiDetailActivity.newIntent(getActivity(), gank.getUrl());
                 startActivity(intent);
             }
         });
@@ -86,5 +95,27 @@ public class MeiZhiFragment extends BaseFragment {
                     mGanks.addAll(gankFilterResult.getResults());
                     mAdapter.notifyDataSetChanged();
                 });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_meizhi, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.change_column:
+                if (mRecyclerView.getLayoutManager() == gridLayoutManager1) {
+                    mRecyclerView.setLayoutManager(gridLayoutManager2);
+                } else {
+                    mRecyclerView.setLayoutManager(gridLayoutManager1);
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

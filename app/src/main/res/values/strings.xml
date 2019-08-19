@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Gank</string>
     <string name="latest">最新</string>
     <string name="filter">分类</string>
@@ -11,5 +12,12 @@
     <string name="commit">提交</string>
     <string name="collect">收藏</string>
     <string name="error">出错了</string>
+    <string name="collected">已收藏</string>
+    <string name="uncollected">取消收藏</string>
+    <string name="change_column">变列</string>
+    <string name="address">干货地址</string>
+    <string name="desc">干货描述</string>
+    <string name="author">提交者ID</string>
+    <string name="type">干货类型</string>
 
 </resources>

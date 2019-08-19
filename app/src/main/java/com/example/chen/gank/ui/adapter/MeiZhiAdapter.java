@@ -14,8 +14,8 @@ import java.util.List;
 import androidx.annotation.Nullable;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/16 21:36
+ * @author : chenshuaiyu
+ * @date : 2019/4/16 21:36
  */
 public class MeiZhiAdapter extends BaseQuickAdapter<Gank, BaseViewHolder> {
     private Context mContext;

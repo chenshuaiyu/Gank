@@ -37,10 +37,10 @@ public abstract class MultiTypeDelegate<T> {
     }
 
     /**
-     * get the item type from specific entity.
+     * get the item_text type from specific entity.
      *
      * @param t entity
-     * @return item type
+     * @return item_text type
      */
     protected abstract int getItemType(T t);
 

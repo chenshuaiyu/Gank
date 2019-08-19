@@ -12,8 +12,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 20:13
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 20:13
  */
 public class GankFilterRemoteSource implements GankFilterSource {
     private static GankFilterRemoteSource sGankFilterRemoteSource;
@@ -27,8 +27,9 @@ public class GankFilterRemoteSource implements GankFilterSource {
     public static GankFilterRemoteSource getInstance() {
         if (sGankFilterRemoteSource == null) {
             synchronized (GankFilterRemoteSource.class) {
-                if (sGankFilterRemoteSource == null)
+                if (sGankFilterRemoteSource == null) {
                     sGankFilterRemoteSource = new GankFilterRemoteSource(RetrofitClient.createService());
+                }
             }
         }
         return sGankFilterRemoteSource;

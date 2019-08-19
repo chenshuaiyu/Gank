@@ -7,19 +7,22 @@ import com.example.chen.gank.data.api.RetrofitClient;
 import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
+import com.example.chen.gank.data.bean.SearchBean;
 import com.example.chen.gank.data.source.GankDailySource;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 20:13
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 20:13
  */
 public class GankDailyRemoteSource implements GankDailySource {
     private static GankDailyRemoteSource sGankDailyRemoteSource;
@@ -31,10 +34,11 @@ public class GankDailyRemoteSource implements GankDailySource {
     }
 
     public static GankDailyRemoteSource getInstance() {
-        if (sGankDailyRemoteSource == null){
-            synchronized (GankDailyRemoteSource.class){
-                if (sGankDailyRemoteSource == null)
+        if (sGankDailyRemoteSource == null) {
+            synchronized (GankDailyRemoteSource.class) {
+                if (sGankDailyRemoteSource == null) {
                     sGankDailyRemoteSource = new GankDailyRemoteSource(RetrofitClient.createService());
+                }
             }
         }
         return sGankDailyRemoteSource;
@@ -127,7 +131,45 @@ public class GankDailyRemoteSource implements GankDailySource {
     }
 
     @Override
+    public void cancelCollect(Gank gank) {
+
+    }
+
+    @Override
+    public LiveData<Gank> isCollected(Gank gank) {
+        return null;
+    }
+
+    @Override
     public MutableLiveData<List<Gank>> getGanks() {
         return null;
+    }
+
+    @Override
+    public MutableLiveData<SearchBean> search(String keywords, String category, int count, int page) {
+        MutableLiveData<SearchBean> liveData = new MutableLiveData<>();
+        mApi.search(keywords, category, count, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SearchBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(SearchBean searchBean) {
+                        liveData.setValue(searchBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+        return liveData;
     }
 }

@@ -3,16 +3,18 @@ package com.example.chen.gank.data.source;
 import com.example.chen.gank.data.bean.Day;
 import com.example.chen.gank.data.bean.Gank;
 import com.example.chen.gank.data.bean.GankDailyResult;
+import com.example.chen.gank.data.bean.SearchBean;
 import com.example.chen.gank.data.source.local.GankDailyLocalSource;
 import com.example.chen.gank.data.source.remote.GankDailyRemoteSource;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 20:09
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 20:09
  */
 public class GankDailyRepository implements GankDailySource {
     private static GankDailyRepository sGankDailyRepository;
@@ -25,11 +27,12 @@ public class GankDailyRepository implements GankDailySource {
         mDailyRemoteSource = dailyRemoteSource;
     }
 
-    public static GankDailyRepository getInstance(GankDailyLocalSource dailyLocalSource, GankDailyRemoteSource dailyRemoteSource){
-        if (sGankDailyRepository == null){
-            synchronized (GankDailyRepository.class){
-                if (sGankDailyRepository == null)
+    public static GankDailyRepository getInstance(GankDailyLocalSource dailyLocalSource, GankDailyRemoteSource dailyRemoteSource) {
+        if (sGankDailyRepository == null) {
+            synchronized (GankDailyRepository.class) {
+                if (sGankDailyRepository == null) {
                     sGankDailyRepository = new GankDailyRepository(dailyLocalSource, dailyRemoteSource);
+                }
             }
         }
         return sGankDailyRepository;
@@ -56,7 +59,22 @@ public class GankDailyRepository implements GankDailySource {
     }
 
     @Override
-    public MutableLiveData<List<Gank>> getGanks() {
+    public LiveData<List<Gank>> getGanks() {
         return mDailyLocalSource.getGanks();
+    }
+
+    @Override
+    public void cancelCollect(Gank gank) {
+        mDailyLocalSource.cancelCollect(gank);
+    }
+
+    @Override
+    public LiveData<Gank> isCollected(Gank gank) {
+        return mDailyLocalSource.isCollected(gank);
+    }
+
+    @Override
+    public MutableLiveData<SearchBean> search(String keywords, String category, int count, int page) {
+        return mDailyRemoteSource.search(keywords, category, count, page);
     }
 }

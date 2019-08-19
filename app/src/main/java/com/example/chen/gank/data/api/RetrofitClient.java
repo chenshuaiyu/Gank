@@ -6,8 +6,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 10:03
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 10:03
  */
 public class RetrofitClient {
     private static final String BASE_URL = "http://gank.io/api/";

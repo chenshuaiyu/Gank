@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/15 21:32
+ * @author : chenshuaiyu
+ * @date : 2019/4/15 21:32
  */
 public class LatestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int GANK_TYPE = 0;
@@ -33,10 +33,11 @@ public class LatestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
-        if (viewType == GANK_TYPE)
+        if (viewType == GANK_TYPE) {
             viewHolder = new GankHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank, parent, false));
-        else if (viewType == TITLE_TYPE)
+        } else if (viewType == TITLE_TYPE) {
             viewHolder = new TitleHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_title, parent, false));
+        }
         return viewHolder;
     }
 
@@ -53,10 +54,11 @@ public class LatestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         Gank gank = mGanks.get(position);
-        if (gank.get_id().equals("-1"))
+        if ("-1".equals(gank.get_id())) {
             return TITLE_TYPE;
-        else
+        } else {
             return GANK_TYPE;
+        }
     }
 
     @Override
@@ -110,6 +112,11 @@ public class LatestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public interface OnClickListener{
+        /**
+         * 点击事件回调
+         *
+         * @param gank
+         */
         void onClick(Gank gank);
     }
 }

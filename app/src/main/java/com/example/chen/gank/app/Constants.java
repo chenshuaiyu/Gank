@@ -1,8 +1,10 @@
 package com.example.chen.gank.app;
 
+import android.content.Intent;
+
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/16 16:25
+ * @author : chenshuaiyu
+ * @date : 2019/4/16 16:25
  */
 public class Constants {
     public static final String[] FILTER_TYPE = new String[]{
@@ -15,8 +17,11 @@ public class Constants {
             "休息视频"
     };
 
-    //Intent key
+    /**
+     * Intent key
+     */
     public static final String GANK = "gank";
     public static final String DAY = "day";
-
+    public static final String GANKDAILYRESULT = "gankDailyResult";
+    public static final String DATE = "date";
 }

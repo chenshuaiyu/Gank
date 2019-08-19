@@ -3,8 +3,8 @@ package com.example.chen.gank.app;
 import android.app.Application;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/18 11:00
+ * @author : chenshuaiyu
+ * @date : 2019/4/18 11:00
  */
 public class GankApp extends Application {
     private static GankApp sApp;

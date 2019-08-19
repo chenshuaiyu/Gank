@@ -3,8 +3,8 @@ package com.example.chen.gank.data.bean;
 import java.util.List;
 
 /**
- * Coder : chenshuaiyu
- * Time : 2019/4/14 7:47
+ * @author : chenshuaiyu
+ * @date : 2019/4/14 7:47
  */
 public class GankFilterResult {
     /**
