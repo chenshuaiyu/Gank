@@ -3,6 +3,7 @@ package com.example.chen.gank.ui.detail;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -61,7 +62,7 @@ public class GankDetailActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this, Inject.getModelFactory()).get(GankDetailViewModel.class);
 
         mToolbar.setTitle(mGank.getDesc());
-        mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        mToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
         setSupportActionBar(mToolbar);
         ActionBar supportActionBar = getSupportActionBar();
         supportActionBar.setDisplayHomeAsUpEnabled(true);
@@ -69,7 +70,7 @@ public class GankDetailActivity extends AppCompatActivity {
 
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mFrameLayout, new LinearLayout.LayoutParams(-1, -1))
-                .useDefaultIndicator(getResources().getColor(R.color.colorPrimary))
+                .useDefaultIndicator(ContextCompat.getColor(this, R.color.colorPrimary))
                 .setMainFrameErrorView(R.layout.error_view, -1)
                 .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)
                 .createAgentWeb()

@@ -2,8 +2,10 @@ package com.example.chen.gank.utils;
 
 import android.os.Handler;
 import android.os.Looper;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -40,12 +42,27 @@ public class AppExecutors {
         return mainThread;
     }
 
-    private static class MainThreadExecutor implements Executor {
+    public static class MainThreadExecutor implements Executor {
+
         private Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 
         @Override
         public void execute(@NonNull Runnable runnable) {
             mainThreadHandler.post(runnable);
+        }
+    }
+
+    public static class DiskIOThreadExecutor implements Executor {
+
+        private final Executor mDiskIO;
+
+        DiskIOThreadExecutor() {
+            mDiskIO = Executors.newSingleThreadExecutor();
+        }
+
+        @Override
+        public void execute(@NonNull Runnable runnable) {
+            mDiskIO.execute(runnable);
         }
     }
 }

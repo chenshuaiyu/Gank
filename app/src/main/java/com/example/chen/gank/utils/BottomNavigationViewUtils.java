@@ -9,7 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * @author : chenshuaiyu
  * @date : 2019/3/17 15:10
  */
-public class BNVUtils {
+public class BottomNavigationViewUtils {
     @SuppressLint({"RestrictedApi", "WrongConstant"})
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

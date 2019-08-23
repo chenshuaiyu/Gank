@@ -10,7 +10,7 @@ import com.example.chen.gank.ui.filter.FilterFragment;
 import com.example.chen.gank.ui.latest.LatestFragment;
 import com.example.chen.gank.ui.meizhi.MeiZhiFragment;
 import com.example.chen.gank.ui.search.SearchActivity;
-import com.example.chen.gank.utils.BNVUtils;
+import com.example.chen.gank.utils.BottomNavigationViewUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.ActionBar;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.app_name);
 
-        BNVUtils.disableShiftMode(mBottomNavigationView);
+        BottomNavigationViewUtils.disableShiftMode(mBottomNavigationView);
 
         mCurFragment = mLatestFragment;
         mFragmentManager = getSupportFragmentManager();

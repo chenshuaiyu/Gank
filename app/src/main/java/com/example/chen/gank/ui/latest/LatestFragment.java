@@ -45,6 +45,8 @@ import butterknife.BindView;
  */
 public class LatestFragment extends BaseFragment {
 
+    public static final String TYPE_TITLE_ID = "-1";
+
     @BindView(R2.id.banner)
     Banner mBanner;
     @BindView(R2.id.tab_layout)
@@ -169,7 +171,7 @@ public class LatestFragment extends BaseFragment {
         //Android
         if (results.getAndroid() != null) {
             Gank android = new Gank();
-            android.set_id("-1");
+            android.set_id(TYPE_TITLE_ID);
             android.setDesc(Constants.FILTER_TYPE[0]);
             mGanks.add(android);
             mGanks.addAll(results.getAndroid());
@@ -177,7 +179,7 @@ public class LatestFragment extends BaseFragment {
         //iOS
         if (results.getiOS() != null) {
             Gank ios = new Gank();
-            ios.set_id("-1");
+            ios.set_id(TYPE_TITLE_ID);
             ios.setDesc(Constants.FILTER_TYPE[1]);
             mGanks.add(ios);
             mGanks.addAll(results.getiOS());
@@ -185,7 +187,7 @@ public class LatestFragment extends BaseFragment {
         //App
         if (results.getApp() != null) {
             Gank app = new Gank();
-            app.set_id("-1");
+            app.set_id(TYPE_TITLE_ID);
             app.setDesc(Constants.FILTER_TYPE[2]);
             mGanks.add(app);
             mGanks.addAll(results.getApp());
@@ -193,7 +195,7 @@ public class LatestFragment extends BaseFragment {
         //前端
         if (results.getFrontEnd() != null) {
             Gank frontEnd = new Gank();
-            frontEnd.set_id("-1");
+            frontEnd.set_id(TYPE_TITLE_ID);
             frontEnd.setDesc(Constants.FILTER_TYPE[3]);
             mGanks.add(frontEnd);
             mGanks.addAll(results.getFrontEnd());
@@ -201,7 +203,7 @@ public class LatestFragment extends BaseFragment {
         //瞎推荐
         if (results.getRecommend() != null) {
             Gank recommend = new Gank();
-            recommend.set_id("-1");
+            recommend.set_id(TYPE_TITLE_ID);
             recommend.setDesc(Constants.FILTER_TYPE[4]);
             mGanks.add(recommend);
             mGanks.addAll(results.getRecommend());
@@ -209,7 +211,7 @@ public class LatestFragment extends BaseFragment {
         //拓展资源
         if (results.getExpand() != null) {
             Gank expand = new Gank();
-            expand.set_id("-1");
+            expand.set_id(TYPE_TITLE_ID);
             expand.setDesc(Constants.FILTER_TYPE[5]);
             mGanks.add(expand);
             mGanks.addAll(results.getExpand());
@@ -217,7 +219,7 @@ public class LatestFragment extends BaseFragment {
         //休息视频
         if (results.getVideo() != null) {
             Gank video = new Gank();
-            video.set_id("-1");
+            video.set_id(TYPE_TITLE_ID);
             video.setDesc(Constants.FILTER_TYPE[6]);
             mGanks.add(video);
             mGanks.addAll(results.getVideo());

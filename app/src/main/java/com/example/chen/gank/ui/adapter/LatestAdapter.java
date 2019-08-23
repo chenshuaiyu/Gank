@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.chen.gank.R;
 import com.example.chen.gank.data.bean.Gank;
+import com.example.chen.gank.ui.latest.LatestFragment;
+
 import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,7 +56,7 @@ public class LatestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         Gank gank = mGanks.get(position);
-        if ("-1".equals(gank.get_id())) {
+        if (gank.get_id().equals(LatestFragment.TYPE_TITLE_ID)) {
             return TITLE_TYPE;
         } else {
             return GANK_TYPE;
